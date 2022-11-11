@@ -27,7 +27,7 @@ server.use((req, res, next) => {
 });
 server.use(
   cors({
-    origin: LOCAL,
+    origin: process.env.LOCAL,
     methods: "GET, POST, PUT, DELETE, OPTIONS",
     credentials: true,
   })
