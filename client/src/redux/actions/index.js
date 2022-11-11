@@ -8,3 +8,9 @@ export function getNews() {
     });
   };
 }
+export const pagesControl = (number) => {
+  return {
+    type: "CURRENT_PAGES",
+    payload: number,
+  };
+};

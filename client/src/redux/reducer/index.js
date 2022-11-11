@@ -1,6 +1,7 @@
 export const initialState = {
   noticias: [],
   allNoticias: [],
+  pages: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -10,6 +11,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         noticias: action.payload,
         allNoticias: action.payload, // PARA QUE ME GUARDE SIEMPRE TODOS LOS PERSONAJES, Y NUNCA LA MODIFICO LUEGO
+      };
+    case "CURRENT_PAGES":
+      return {
+        ...state,
+        pages: action.payload,
       };
     default:
       return state;
