@@ -21,9 +21,23 @@ const getAllNews = async (req, res, next) => {
       return obj;
     });
     let allNews = await Noticias.findAll();
-    if (!allNews.length) await Noticias.bulkCreate(news);
-    console.log(allNews);
+    if (!allNews.length || allNews.length < 400)
+      await Noticias.bulkCreate(news);
+
+    if (allNews.length > 299) {
+      let sliced = allNews.slice(1, 299);
+      sliced.map(async (el) => {
+        await Noticias.destroy({
+          where: {
+            title: el.title,
+          },
+        });
+      });
+      await Noticias.bulkCreate(news);
+    }
+
     // //const categories
+
     const noticiasDb = await Noticias.findAll();
     res.json(noticiasDb);
   } catch (error) {
