@@ -1,0 +1,12 @@
+Versión 0.0.1 : 
+  -- Creación de la aplicación con vista de noticias.
+  -- Noticias filtradas para lenguaje español.
+
+Versión 0.0.2 : 
+  -- Despliegue de aplicación Node y base de datos PostgreSQL en Railway.
+  -- Despliegue de aplicación React en Vercel
+  -- Añadidos paginado, solo diez (10) noticias por página.
+
+Versión 0.0.3 : 
+  -- Cambios en el controlador de Noticias, solo se guardan un máximo de 300 noticias en simultáneo.
+  -- Se añadió un intérvalo cada veinticuatro (24) horas para la actualización de noticias. 

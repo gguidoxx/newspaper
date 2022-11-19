@@ -27,7 +27,7 @@ function App() {
     dispatch(getNews());
   }, [dispatch]);
   return (
-    <div className="dark:text-orange-50 bg-neutral-100 dark:bg-neutral-800">
+    <div className="dark:text-orange-50 bg-neutral-100 dark:bg-neutral-800 min-h-screen">
       <Nav />
       <div className="grid grid-cols-1 gap-4 pt-24 m-auto max-w-7xl ">
         <div className="m-auto">

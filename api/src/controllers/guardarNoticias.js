@@ -5,38 +5,60 @@ const { Op } = require("sequelize");
 
 const getAllNews = async (req, res, next) => {
   try {
-    let news = await axios.get(
-      "https://newsapi.org/v2/top-headlines?language=es&pageSize=100&apiKey=2ec0bf1b68d34946aa0a05e97f16ca7d"
-    );
+    const intervalo = 86400000;
 
-    news = news?.data.articles.map((el) => {
-      const obj = {
-        title: el.title,
-        author: el.author,
-        url: el.url,
-        description: el.description,
-        image: el.urlToImage,
-        source: el.source.name,
-      };
-      return obj;
-    });
     let allNews = await Noticias.findAll();
-    if (!allNews.length || allNews.length < 400)
-      await Noticias.bulkCreate(news);
+    if (!allNews.length) {
+      let news = await axios.get(
+        "https://newsapi.org/v2/top-headlines?language=es&pageSize=100&apiKey=2ec0bf1b68d34946aa0a05e97f16ca7d"
+      );
 
-    if (allNews.length > 299) {
-      let sliced = allNews.slice(1, 299);
-      sliced.map(async (el) => {
-        await Noticias.destroy({
-          where: {
-            title: el.title,
-          },
-        });
+      news = news?.data.articles.map((el) => {
+        const obj = {
+          title: el.title,
+          author: el.author,
+          url: el.url,
+          description: el.description,
+          image: el.urlToImage,
+          source: el.source.name,
+        };
+        return obj;
       });
       await Noticias.bulkCreate(news);
     }
 
-    // //const categories
+    setInterval(async () => {
+      let allNews = await Noticias.findAll();
+
+      if (allNews.length < 400) {
+        let news = await axios.get(
+          "https://newsapi.org/v2/top-headlines?language=es&pageSize=100&apiKey=2ec0bf1b68d34946aa0a05e97f16ca7d"
+        );
+
+        news = news?.data.articles.map((el) => {
+          const obj = {
+            title: el.title,
+            author: el.author,
+            url: el.url,
+            description: el.description,
+            image: el.urlToImage,
+            source: el.source.name,
+          };
+          return obj;
+        });
+        await Noticias.bulkCreate(news);
+      }
+      if (allNews.length > 299) {
+        allNews.map(async (el) => {
+          await Noticias.destroy({
+            where: {
+              title: el.title,
+            },
+          });
+        });
+        await Noticias.bulkCreate(news);
+      }
+    }, intervalo);
 
     const noticiasDb = await Noticias.findAll();
     res.json(noticiasDb);
