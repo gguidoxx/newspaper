@@ -10,3 +10,6 @@ Versión 0.0.2 :
 Versión 0.0.3 : 
   -- Cambios en el controlador de Noticias, solo se guardan un máximo de 300 noticias en simultáneo.
   -- Se añadió un intérvalo cada veinticuatro (24) horas para la actualización de noticias. 
+  -- Se colocó nombre e ícono a la página.
+  -- Comenzamos a estilar las tarjetas de noticias.
+  -- Ahora tiene modo oscuro, tomando en cuenta el tema preferido en el navegador.
