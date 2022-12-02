@@ -13,7 +13,7 @@ const getAllNews = async (req, res, next) => {
         "https://newsapi.org/v2/top-headlines?language=es&pageSize=100&apiKey=2ec0bf1b68d34946aa0a05e97f16ca7d"
       );
 
-      news = news?.data.articles.map((el) => {
+      news = news?.data?.articles?.map((el) => {
         const obj = {
           title: el.title,
           author: el.author,
@@ -35,7 +35,7 @@ const getAllNews = async (req, res, next) => {
           "https://newsapi.org/v2/top-headlines?language=es&pageSize=100&apiKey=2ec0bf1b68d34946aa0a05e97f16ca7d"
         );
 
-        news = news?.data.articles.map((el) => {
+        news = news?.data?.articles?.map((el) => {
           const obj = {
             title: el.title,
             author: el.author,
