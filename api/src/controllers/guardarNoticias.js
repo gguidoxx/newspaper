@@ -7,8 +7,8 @@ const getAllNews = async (req, res, next) => {
   try {
     const intervalo = 86400000;
 
-    let allNews = await Noticias.findAll();
-    if (allNews.length === 0 || !allNews) {
+    let allNews = await Noticias?.findAll();
+    if (allNews == undefined || allNews.length === 0) {
       let news = await axios.get(
         "https://newsapi.org/v2/top-headlines?language=es&pageSize=100&apiKey=2ec0bf1b68d34946aa0a05e97f16ca7d"
       );
